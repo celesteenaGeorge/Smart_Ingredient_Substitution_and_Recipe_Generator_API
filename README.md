@@ -1,1 +1,1 @@
-#Smart_Ingredient_Substitution_and_Recipe_Generator_API
+#Smart_Ingredient_Substitution_and_Recipe_Generator

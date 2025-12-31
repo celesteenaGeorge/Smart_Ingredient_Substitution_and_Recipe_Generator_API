@@ -52,7 +52,7 @@ public class RecipeService {
 
 		Map<String, Object> systemMessage = Map.of("role", "system", "content", """
 				You are a professional culinary assistant.
-				Generate a creative but easy-to-follow recipe for 2 servings
+				Generate a creative but easy-to-follow recipe 
 				based on the user's ingredient, dietary accommodations, and allergens.
 				Include clear steps and practical cooking tips.
 				Respond strictly in JSON format following the schema provided.

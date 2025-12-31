@@ -26,12 +26,12 @@ public class RecipeController {
 	private ValidationService ValidationService;
 
 	@PostMapping("/substitute")
-	public SubstituteResponse substituteIngredient(@RequestBody SubstituteRequest request) {
+	public SubstituteResponse getRecipeSubstitutions(@RequestBody SubstituteRequest request) {
 
 		return substituteService.getRecipeSubstitutions(request);
 	}
 
-	@PostMapping("/getRecipe")
+	@PostMapping("/recipe")
 	public RecipeResponse getRecipe(@RequestBody SubstituteRequest request) {
 
 		return recipeService.generateRecipe(request);

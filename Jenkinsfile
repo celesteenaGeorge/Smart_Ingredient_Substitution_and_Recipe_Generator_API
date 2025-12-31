@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build JAR') {
             steps {
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
 
-        stage('Verify') {
+        stage('Build Docker Image') {
             steps {
-                sh 'ls target'
+                sh 'docker build -t ris-backend .'
             }
         }
     }

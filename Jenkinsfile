@@ -17,35 +17,30 @@ pipeline {
                 ]) {
                     sshagent(credentials: ['ec2-ssh-key']) {
 
-                       
+        
                         sh """
-                        ssh -o StrictHostKeyChecking=no ec2-user@13.60.12.187 '
-                            mkdir -p ~/app
-                        '
+                        ssh -o StrictHostKeyChecking=no ec2-user@13.60.12.187 \
+                        'mkdir -p ~/app'
                         """
 
- 
                         sh """
                         scp -o StrictHostKeyChecking=no target/RIS_App.jar \
                             ec2-user@13.60.12.187:~/app/RIS_App.jar
                         """
 
+                   
+                        sh """
+                        scp -o StrictHostKeyChecking=no Dockerfile \
+                            ec2-user@13.60.12.187:~/app/Dockerfile
+                        """
 
                         sh """
                         ssh -o StrictHostKeyChecking=no ec2-user@13.60.12.187 '
-                            cat > ~/app/Dockerfile << EOF
-							FROM eclipse-temurin:21-jdk
-							WORKDIR /app
-							COPY RIS_App.jar app.jar
-							EXPOSE 8080
-							ENTRYPOINT ["java","-jar","app.jar"]
-							EOF
+                            sudo docker stop ris-backend || true
+                            sudo docker rm ris-backend || true
+                            sudo docker build -t ris-backend ~/app
 
-                            docker stop ris-backend || true
-                            docker rm ris-backend || true
-                            docker build -t ris-backend ~/app
-
-                            docker run -d --name ris-backend \
+                            sudo docker run -d --name ris-backend \
                               --restart unless-stopped \
                               -p 8080:8080 \
                               -e OPENAI_API_URL=${OPENAI_API_URL} \

@@ -2,7 +2,7 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY target/*.jar RIS_App.jar
+COPY RIS_App.jar  RIS_App.jar
 
 EXPOSE 8080
 

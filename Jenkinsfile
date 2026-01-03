@@ -25,17 +25,17 @@ pipeline {
 
                         sh """
                         scp -o StrictHostKeyChecking=no target/RIS_App.jar \
-                            ec2-user@13.60.12.187:~/app/RIS_App.jar
+                            ec2-user@13.61.19.36:~/app/RIS_App.jar
                         """
 
                    
                         sh """
                         scp -o StrictHostKeyChecking=no Dockerfile \
-                            ec2-user@13.60.12.187:~/app/Dockerfile
+                            ec2-user@13.61.19.36:~/app/Dockerfile
                         """
 
                         sh """
-                        ssh -o StrictHostKeyChecking=no ec2-user@13.60.12.187 '
+                        ssh -o StrictHostKeyChecking=no ec2-user@13.61.19.36'
                             sudo docker stop ris-backend || true
                             sudo docker rm ris-backend || true
                             sudo docker build -t ris-backend ~/app

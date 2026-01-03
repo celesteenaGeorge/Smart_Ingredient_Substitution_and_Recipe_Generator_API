@@ -19,7 +19,7 @@ pipeline {
 
         
                         sh """
-                        ssh -o StrictHostKeyChecking=no ec2-user@13.60.12.187 \
+                        ssh -o StrictHostKeyChecking=no ec2-user@13.61.19.36 \
                         'mkdir -p ~/app'
                         """
 

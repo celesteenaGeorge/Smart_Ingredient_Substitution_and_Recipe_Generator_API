@@ -34,8 +34,8 @@ pipeline {
                             ec2-user@13.61.19.36:~/app/Dockerfile
                         """
 
-                        sh """
-                        ssh -o StrictHostKeyChecking=no ec2-user@13.61.19.36'
+                        sh '''
+                        ssh -o StrictHostKeyChecking=no ec2-user@13.61.19.36 "
                             sudo docker stop ris-backend || true
                             sudo docker rm ris-backend || true
                             sudo docker build -t ris-backend ~/app
@@ -43,11 +43,11 @@ pipeline {
                             sudo docker run -d --name ris-backend \
                               --restart unless-stopped \
                               -p 8080:8080 \
-                              -e OPENAI_API_URL=${OPENAI_API_URL} \
-                              -e OPENAI_API_KEY=${OPENAI_API_KEY} \
+                              -e OPENAI_API_URL=$OPENAI_API_URL \
+                              -e OPENAI_API_KEY=$OPENAI_API_KEY \
                               ris-backend
-                        '
-                        """
+                        "
+                       '''
                     }
                 }
             }
